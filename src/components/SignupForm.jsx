@@ -9,11 +9,6 @@ import Option from "react-select"
 // color here is used to set the color of the text in the dropdown
 const options = [
   {
-    value: "default",
-    label: "Type at least 3 search characters to see options",
-    color: "#333"
-  },
-  {
     value: "Peter Parker & Associates",
     label: "Peter Parker & Associates",
     color: "#333"
