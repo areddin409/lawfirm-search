@@ -5,6 +5,7 @@ import AsyncCreatableSelect from "react-select/async-creatable"
 import { Col, Row } from "react-bootstrap"
 
 // Array of options for the React-Select component to use as a data source
+// color here is used to set the color of the text in the dropdown
 const options = [
   {
     value: "Peter Parker & Associates",
@@ -138,6 +139,7 @@ function SignupForm() {
           loadOptions={loadOptions}
           isClearable
           defaultOptions
+          //isMulti // Uncomment this to allow multiple selections
           styles={colorStyles}
           onChange={handleChange}
         />
