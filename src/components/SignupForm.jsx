@@ -3,10 +3,16 @@ import React from "react"
 import { useFormik } from "formik"
 import AsyncCreatableSelect from "react-select/async-creatable"
 import { Col, Row } from "react-bootstrap"
+import Option from "react-select"
 
 // Array of options for the React-Select component to use as a data source
 // color here is used to set the color of the text in the dropdown
 const options = [
+  {
+    value: "default",
+    label: "Type at least 3 search characters to see options",
+    color: "#333"
+  },
   {
     value: "Peter Parker & Associates",
     label: "Peter Parker & Associates",
@@ -94,15 +100,16 @@ function SignupForm() {
 
   // Function to handle loading options for the React-Select component
   const loadOptions = (searchValue, callback) => {
-    if (searchValue.length >= 3) {
-      setTimeout(() => {
-        const filteredOptions = options.filter((option) =>
-          option.label.toLowerCase().includes(searchValue.toLowerCase())
-        )
-        console.log("loadOptions", searchValue, filteredOptions)
-        callback(filteredOptions)
-      }, 1000)
-    }
+    const isSearchable = searchValue.length >= 3
+    if (!isSearchable) return
+
+    setTimeout(() => {
+      const filteredOptions = options.filter((option) =>
+        option.label.toLowerCase().includes(searchValue.toLowerCase())
+      )
+      console.log("loadOptions", searchValue, filteredOptions)
+      callback(filteredOptions)
+    }, 1000)
   }
 
   return (
@@ -138,9 +145,10 @@ function SignupForm() {
         <AsyncCreatableSelect
           loadOptions={loadOptions}
           isClearable
-          defaultOptions
+          // components={{ Option: CustomOption }}
           //isMulti // Uncomment this to allow multiple selections
           styles={colorStyles}
+          placeholder="Type at least 3 search characters to see options"
           onChange={handleChange}
         />
 
